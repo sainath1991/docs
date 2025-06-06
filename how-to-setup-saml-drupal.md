@@ -1,13 +1,13 @@
-Install the simplesam php drupal module (simplesamlphp_auth)
+1. Install the simplesam php drupal module (simplesamlphp_auth)
 
-composer require 'drupal/simplesamlphp_auth:^4.0'
+```composer require 'drupal/simplesamlphp_auth:^4.0'```
 
-configure the simplesaml php
-  download the simplesamlphp library from the official website (https://simplesamlphp.org/download/)
-  place it inside the module root directory or any place you prefer
-  make sure your site is HTTPS enabled
-  add the vhost as mentioned below setting
-  ``
+2. configure the simplesaml php
+  - download the simplesamlphp library from the official website (https://simplesamlphp.org/download/)
+  - place it inside the drupals root directory or any place you prefer
+  - make sure your site is HTTPS enabled
+  - add the vhost as mentioned below setting and adjust the saml alias and config folder path accordingly.
+  ```
   <VirtualHost *:443>
     ##ServerAdmin webmaster@dummy-host2.example.com
     DocumentRoot "C:/drupal/site2/web"
@@ -27,5 +27,42 @@ configure the simplesaml php
   	  Require all granted
      </Directory>
  </VirtualHost>
-``
+```
+  - add the configuration to simplesaml config file. we need to add config.php, authsource.php file in the config folder and metadata file in the metadata folder. Follow the instrution added in the drupal doc https://www.drupal.org/docs/contributed-modules/apigee-developer-portal-kickstart/integrate-simplesamlphp-authentication
+    - update config.php file with the below values. 
+    place below code just after <?php tag	
+    ```
+    	require $_SERVER['DOCUMENT_ROOT'] . '/sites/default/settings.php';
+	$host = $_SERVER['HTTP_HOST'];
+	$db = $databases['default']['default'];
+    ```
+	place the below code at the bottom of the config.php file or update directly in confg array.
+    ```
+    	// Set some security and other configs that are set above, however we
+	// overwrite them here to keep all changes in one area.
+	$config['technicalcontact_name'] = "Your Name";
+	$config['technicalcontact_email'] = "your_email@yourdomain.com";
+	
+	// Change these for your installation.
+	$config['secretsalt'] = '[YOUR-SECRET-SALT-ANY-STRING]';
+	$config['auth.adminpassword'] = '[ADMIN-PASSWORD]';
+	$config['admin.protectindexpage'] = TRUE;
+	
+	// Base URL
+	$config['baseurlpath'] = 'https://'. $host .'/simplesaml/';
+	
+	// SQL Connection
+	$config['store.type'] = 'sql';
+	$config['store.sql.dsn'] = sprintf('%s:host=%s;port=%s;dbname=%s', $db['driver'], $db['host'], $db['port'], $db['database']);
+	$config['store.sql.username'] = $db['username'];
+	$config['store.sql.password'] = $db['password'];
+	$config['store.sql.prefix'] = 'simplesaml';
+	
+	// Temp directory must be writable
+	$config['tempdir'] = '/path/to/tmp/dir';
+   ```
+
  restart the server. 
+
+3. At this moment we should able to access saml configuration by /simplesaml, and admin configuration by going to the admin configuration /simplesaml/admin
+4. 
