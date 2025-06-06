@@ -74,10 +74,8 @@
        - place the file in the metadata folder (metadata/saml20-idp-remote.php)
        - to point if the metadata folder is not in default place
          	```
-	 	/*
-	         * This option allows you to specify a directory for your metadata outside of the standard metadata directory
-	         * included in the standard distribution of the software.
-	         */
+		 This option allows you to specify a directory for your metadata outside of the standard metadata directory
+	         included in the standard distribution of the software.
                 'metadatadir' => 'C:/drupal/site2/web/simplesamlphp/metadata',
 	 	```
 3. restart the server.
