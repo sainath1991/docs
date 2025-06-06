@@ -64,7 +64,8 @@
 	  ```$config['default-sp']['entityID'] = '[UNIQUE-ID-OFTEN-A-DOMAIN-NAME]';```
  	- add below line after the ```RewriteCond %{REQUEST_URI} !/core/modules/statistics/statistics.php$```
 	```# Allow access to simplesaml paths
-RewriteCond %{REQUEST_URI} !^/simplesaml```
+	   RewriteCond %{REQUEST_URI} !^/simplesaml
+	```
        - command to generate random salt
        ```LC_ALL=C tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo```
        - Create cert and private key
