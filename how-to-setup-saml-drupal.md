@@ -79,6 +79,6 @@
 	         * included in the standard distribution of the software.
 	         */
                 'metadatadir' => 'C:/drupal/site2/web/simplesamlphp/metadata',
-	```
+	 	```
 3. restart the server.
 4. At this moment we should able to access saml configuration by /simplesaml, and admin configuration by going to the admin configuration /simplesaml/admin
