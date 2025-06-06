@@ -63,14 +63,22 @@
         - Update authsource.php file. Add the unique sp entity id.
 	  ```$config['default-sp']['entityID'] = '[UNIQUE-ID-OFTEN-A-DOMAIN-NAME]';```
  	- add below line after the ```RewriteCond %{REQUEST_URI} !/core/modules/statistics/statistics.php$```
-	```# Allow access to simplesaml paths
-	   RewriteCond %{REQUEST_URI} !^/simplesaml
-	```
+		```
+	 	 RewriteCond %{REQUEST_URI} !^/simplesaml
+		```
        - command to generate random salt
-       ```LC_ALL=C tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo```
+		```LC_ALL=C tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo```
        - Create cert and private key
-       ```openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out saml.crt -keyout saml.pem```
+       		```openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out saml.crt -keyout saml.pem```
        - geenrate metadata file from the converter for the given idp xml data simplesaml/module.php/admin/federation/metadata-converter
        - place the file in the metadata folder (metadata/saml20-idp-remote.php)
+       - to point if the metadata folder is not in default place
+         	```
+	 	/*
+	         * This option allows you to specify a directory for your metadata outside of the standard metadata directory
+	         * included in the standard distribution of the software.
+	         */
+                'metadatadir' => 'C:/drupal/site2/web/simplesamlphp/metadata',
+	```
 3. restart the server.
 4. At this moment we should able to access saml configuration by /simplesaml, and admin configuration by going to the admin configuration /simplesaml/admin
