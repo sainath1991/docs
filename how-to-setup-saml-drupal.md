@@ -70,7 +70,7 @@
 		```LC_ALL=C tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo```
        - Create cert and private key
        		```openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out saml.crt -keyout saml.pem```
-       - geenrate metadata file from the converter for the given idp xml data simplesaml/module.php/admin/federation/metadata-converter
+       - genrate metadata file from the converter for the given idp xml data simplesaml/module.php/admin/federation/metadata-converter
        - place the file in the metadata folder (metadata/saml20-idp-remote.php)
        - to point if the metadata folder is not in default place
          	```
