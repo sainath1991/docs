@@ -35,7 +35,7 @@
 		$host = $_SERVER['HTTP_HOST'];
 		$db = $databases['default']['default'];
 	    ```
-	- place the below code at the bottom of the config.php file or update directly in confg array.
+     	- place the below code at the bottom of the config.php file or update directly in confg array
 	    ```
 	    	// Set some security and other configs that are set above, however we
 		// overwrite them here to keep all changes in one area.
